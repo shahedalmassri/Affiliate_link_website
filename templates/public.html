@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+<!-- This page is the PUBLIC ACCESS page accessed directly through the domain name (The "/" route) -->
+<!-- Title of the webpage that shows up on the tab itself -->
+{% block title %}
+<h1>INSERT TITLE PUBLIC</h1>
+{% endblock %}
+
+{% block main %}
+    <!-- This is the cards container, is-multiline makes it go to multiple lines. See bulma doc for more info  -->
+    <div class="columns is-multiline">
+    <!-- Variables are in JINJA syntax -->
+    <!-- This loops over the website.db database file to grab information for each card -->
+    {% for card in cards %}
+    <!-- is-one-third makes it take up a third of the space on the webpage -->
+    <div class="column is-one-third">
+      <div class="card" id="{{ card.card_id }}">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <a href="{{ card.product_link }}"><img src="{{ card.image_link }}" alt="{{ card.title }}-image link"></a>
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <!--<div class="media-left">
+               <figure class="image is-48x48">
+                <img src="https://media.philstar.com/photos/2023/06/30/cat-international-cat-show_2023-06-30_17-25-57.jpg" alt="Placeholder image">
+              </figure>
+              </div>  -->
+            <div class="media-content">
+              <p class="title is-4"> <a href="{{ card.product_link }}">{{ card.title }}</a></p>
+              <p class="subtitle is-6">{{ card.subtitle }}</p>
+            </div>
+          </div>
+          <div class="content">
+            {{ card.body_text }}
+            <!-- <a href="#">#css</a> <a href="#">#responsive</a> -->
+            <br>
+            <br>
+            <time datetime="{{card.date_added}}">Date/time created: {{ card.date_added }}</time>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+
+
+
+{% endblock %}
